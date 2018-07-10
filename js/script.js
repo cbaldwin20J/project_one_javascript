@@ -1,7 +1,4 @@
-// event listener to respond to "Show another quote" button clicks
-// when user clicks anywhere on the button, the "printQuote" function is called
 
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
 // The object literals of quotes
 var quotes = [
@@ -47,20 +44,20 @@ var quotes = [
 
 ];
 
-// The_num is the current quote we are on.
-var the_num
 
 // Gets a random object literal from the 'quotes' array.
 function getRandomQuote() {
+	current = document.querySelector('.quote');
 	while (true) {
-		num = Math.floor(Math.random() * (quotes.length));
-		if (num != the_num) {
-			the_num = num;
+		var newQuoteNum = Math.floor(Math.random() * (quotes.length));
+		if (current && quotes[newQuoteNum]['quote'] != current.innerText) {
+
 			break;
-		};
+		}else if (!current) {
+			break;
+		}
 	};
-	console.log(num)
-	return quotes[num];
+	return quotes[newQuoteNum];
 };
 
 // Gets a random rgba color value
@@ -92,6 +89,12 @@ function printQuote() {
     document.getElementById('quote-box').innerHTML = the_html;
     document.body.style.backgroundColor = background_color;
 };
+
+
+// event listener to respond to "Show another quote" button clicks
+// when user clicks anywhere on the button, the "printQuote" function is called
+
+document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
 // When the app first loads, we call printQuote so it loads a quote.
 printQuote();
